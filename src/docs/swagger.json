@@ -1,0 +1,423 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "PetStore",
+    "description": "Documentation of an API of a Microservice of a franchise of veterinary clinics",
+    "contact": {
+      "email": "paulo.morais.pb@compasso.com.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "BaseUrl"
+    },
+    {
+      "url": "http://localhost:5000/doc-api",
+      "description": "Documentation Api"
+    }
+  ],
+  "basePath": "/",
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Tutor": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"
+          },
+          "zip_code": {
+            "type": "number"
+          },
+          "date_of_birth": {
+            "type": "string"
+          }
+        }
+      },
+      "Pet": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "species": {
+            "type": "string"
+          },
+          "carry": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "number"
+          },
+          "date_of_birth": {
+            "type": "string"
+          }
+        }
+      },
+      "Auth": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirmpassword": {
+            "type": "string"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/tutors": {
+      "post": {
+        "summary": "Create a new tutor.",
+        "description": "Route responsible for creating a new tutor.",
+        "tags": ["Tutors"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tutor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "This product already exists"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieve all tutors.",
+        "description": "Retrieve a list of all tutors.",
+        "tags": ["Tutors"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/tutors/{user_id}": {
+      "get": {
+        "summary": "Retrieve a tutor.",
+        "description": "Retrieve a tutor by the provided id.",
+        "tags": ["Tutors"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The id of the tutor to retrieve.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "This tutor already exists"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a tutor",
+        "description": "Update a tutor. Authentication required.",
+        "tags": ["Tutors"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The id of the tutor to update.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a tutor",
+        "description": "Delete a tutor. Authentication required.",
+        "tags": ["Tutors"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The id of the tutor to delete.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "summary": "Create a user session.",
+        "description": "Create a user session.",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auth"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "This tutor already exists"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Create a user session.",
+        "description": "Create a user session.",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "This tutor already exists"
+          }
+        }
+      }
+    },
+    "/pet/{user_id}": {
+      "post": {
+        "summary": "Create a pet.",
+        "description": "Create a pet and add it to a tutor. Authentication required.",
+        "tags": ["Pet"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The id of the tutor to add the pet to.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "This pet already exists"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieve a pet.",
+        "description": "Retrieve a pet by the provided id.",
+        "tags": ["Pet"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The id of the pet to retrieve.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "This pet already exists"
+          }
+        }
+      }
+    },
+    "/pet/{pet_id}/tutors/{user_id}": {
+      "put": {
+        "summary": "Update pet information",
+        "description": "Update the information of a pet. Authentication required.",
+        "tags": ["Pet"],
+        "parameters": [
+          {
+            "name": "pet_id",
+            "in": "path",
+            "description": "The id of the pet to update.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The id of the tutor to update the pet for.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove pet from tutor",
+        "description": "Remove a pet from a tutor. Authentication required.",
+        "tags": ["Pet"],
+        "parameters": [
+          {
+            "name": "pet_id",
+            "in": "path",
+            "description": "The id of the pet to remove.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The id of the tutor to remove the pet from.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/pets": {
+      "get": {
+        "summary": "Retrieve all pets",
+        "description": "Retrieve a list of all pets, regardless of tutors.",
+        "tags": ["Pet"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  }
+}
