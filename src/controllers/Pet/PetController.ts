@@ -1,9 +1,27 @@
+// import { Request, Response } from "express";
+// const Pet = require("../../modules/Pet")
+
 import { Request, Response } from 'express';
 const Pet = require('../../modules/Pet');
 const User = require('../../modules/user');
 
 const PetController = {
+  // async createPet(req: Request, res: Response) {
+  //     const bodyData = req.body;
+  //     const { user_id } = req.params;
 
+  //     try {
+  //         const data = { user: user_id, ...bodyData };
+
+  //         const newPet = await Pet.create(data);
+  //         await newPet.populate('user').execPopulate();
+
+  //         return res.status(201).json({ newPet, message: "Pet created successfully" });
+  //     } catch (error) {
+  //         return res.status(400).json({ error, message: "Request error. Please check and try again." });
+
+  //     }
+  // },
   async createPet(req: Request, res: Response) {
     const bodyData = req.body;
     const { user_id } = req.params;
@@ -69,6 +87,27 @@ const PetController = {
       return res.status(400).json(error);
     }
   },
+  // Verificar se o usuário possui pets associados antes de excluir
+  // async deletePet(req: Request, res: Response) {
+  //     const { pet_id, user_id } = req.params;
+
+  //     try {
+  //         // Verificar se o usuário possui pets associados antes de excluir
+  //         const userHasPets = await Pet.exists({ user: user_id });
+  //         if (userHasPets) {
+  //             return res.status(400).json({ message: "Cannot delete user with associated pets" });
+  //         }
+
+  //         // Excluir o pet
+  //         const deletePet = await Pet.findByIdAndDelete(pet_id);
+
+  //         return res
+  //             .status(204)
+  //             .json({ deletePet, message: "Delete successful" });
+  //     } catch (error) {
+  //         return res.status(400).json({ error, message: "Request error. Please check and try again." });
+  //     }
+  // },
   async getAllPets(req: Request, res: Response) {
     try {
       const pet = await Pet.find();

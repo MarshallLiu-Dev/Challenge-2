@@ -1,19 +1,26 @@
+import fs from 'fs';
+import yaml from 'js-yaml';
 import { Request, Response, Router } from 'express';
 import { homeController } from './controllers/homeController';
-// import swaggerUi from 'swagger-ui-express';
-// import Docs from './docs/swagger.json';
+import swaggerUi from 'swagger-ui-express';
 
 const UserController = require('./controllers/Tutor/UserController');
 const AuthController = require('./controllers/Auth/Auth');
 const PetController = require('./controllers/Pet/PetController');
 import { checkToken } from './middlewares/checkToken';
+
 const router: Router = Router();
 
-//Routes
+// Carrega o arquivo YAML
+const swaggerDocument = yaml.load(fs.readFileSync('./swagger.yml', 'utf8')) as object;
 
-// Main
+// Routes
 router.get('/', homeController.home);
-// router.get('/doc-api', swaggerUi.serve, swaggerUi.setup(Docs)); //Swagger
+
+// Configura o Swagger UI
+router.use('/doc-api', swaggerUi.serve);
+router.get('/doc-api', swaggerUi.setup(swaggerDocument));
+
 
 //  Criar Usuarios, Listar Usuarios  Editar Usuario e Deletar
 

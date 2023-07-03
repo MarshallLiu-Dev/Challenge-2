@@ -1,3 +1,5 @@
+// import { Request, Response } from "express";
+// const User = require("../../modules/user");
 import { Request, Response } from 'express';
 const User = require('../../modules/user');
 const Pet = require('../../modules/Pet');

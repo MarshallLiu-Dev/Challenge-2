@@ -35,6 +35,8 @@ Please note that all the endpoints marked with "Authentication required" necessi
 - express (v4.18.2)
 - mongoose (v7.3.0)
 
+## Using Postman or Insomnia 🐾
+You can use Postman or Insomnia to interact with the PetStore microservice endpoints. Here's how to get started:
 ## Configuration ⚙️
 
 1 - 1 - Clone the repository:
@@ -43,7 +45,8 @@ https://github.com/MarshallLiu-Dev/Challenge-2.git
 ```
  2 - Install the dependencies:
 
- ```bas
+ ```bash
+
  npm install
 ```
 
@@ -64,7 +67,8 @@ SECRET = '' Hash
 
 
  ```bash
-npm run start:dev
+npm run start:dev 
+
 ```
 ## Authors 🧑‍💻
 
